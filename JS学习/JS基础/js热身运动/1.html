@@ -35,10 +35,10 @@
 				left: 0;
 				filter: alpha(opacity=30);
 				opacity: 0.3;
-				/*display: none;*/
+				display: none;
 			}
 
-			#btn {
+			.btn {
 				position: absolute;
 				top: 100px;
 				left: 30%;
@@ -54,6 +54,7 @@
 				right: 10%;
 				border-radius: 3px;
 				z-index: 1001;
+				display: none;
 			}
 			
 			.configable .content {
@@ -127,13 +128,13 @@
 	</head>
 	<body>
 		
-		<div class="box">
+		<div class="box" id="Box">
 			box
 		</div>
 		
-		<input type="button" value='设置' id='btn'>
+		<input class='btn' type="button" value='设置' id='Btn'>
 
-		<div class="configable">
+		<div class="configable" id="Configable">
 
 			<div class="content">
 				<div class="config config-bgc">
@@ -156,15 +157,71 @@
 				</div>
 			</div>
 			<div class="setting">
-				<a href="javascript:;" class="set">初始化</a>
-				<a href="javascript:;" class="set">确认</a>
+				<a href="javascript:;" class="set" id='Reset'>初始化</a>
+				<a href="javascript:;" class="set" id='Confirm'>确认</a>
 			</div>
 		</div>
-		<div class="masklayer"></div>
+		<div class="masklayer" id='masklayer'></div>
 
 		<script type='text/javascript'>
 			window.onload = function(){
+				var oBtn = document.getElementById('Btn');
 
+				var oMask = document.getElementById('masklayer'); 
+
+				var oConfigable = document.getElementById('Configable');
+
+				var aSpan = oConfigable.getElementsByTagName('span');
+
+				var oConfirm = document.getElementById('Confirm');
+
+				var oReset = document.getElementById('Reset');
+
+				var oBox = document.getElementById('Box');
+
+				oBtn.onclick = function(){
+					oMask.style.display = 'block';
+					oConfigable.style.display = 'block';
+				}
+
+				oReset.onclick = function(){
+					oBox.style.width = '100px';
+					oBox.style.height = '100px';
+					oBox.style.backgroundColor = "yellow";
+				}
+
+				oConfirm.onclick = function(){
+					oMask.style.display = 'none';
+					oConfigable.style.display = 'none';
+				}
+
+
+
+				oConfigable.onclick = function(event){
+					/*事件委托*/
+					var ev = event||ev;
+					var target = ev.target||ev.srcElement;
+					if(target.nodeName.toLowerCase() === 'span'){
+						var oParentEl = target.parentElement;
+						setStyle(oParentEl.className,target.innerText,oBox);
+					}
+				}
+			}
+
+			function setStyle(className,value,target){
+				//var reg = new RegExp(className,"g");
+				
+				switch(true){
+					case new RegExp('config-width').test(className):
+						target.style.width = parseFloat(value) + 'px';
+						break;
+					case new RegExp('config-height').test(className):
+						target.style.height = parseFloat(value) + 'px';
+						break;
+					case new RegExp('config-bgc').test(className):
+						target.style.backgroundColor = value;
+						break;
+				}
 
 			}
 		</script>
