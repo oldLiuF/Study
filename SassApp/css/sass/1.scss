@@ -1,0 +1,220 @@
+body{
+    background:blue;
+    p{
+        margin:5px;
+        color:yellow;
+        font-size:5px;
+        //全局变量
+        $height:15px !global;
+        
+    }
+}
+
+/*变量*/
+$color :red;
+$width :25px;
+//多值变量
+$padding:10px 4px 9px 5px;
+//类似键值对类型   
+//map-get(对象,key)
+$maps:(width:10px,height:10px);
+//map  存入变量进去
+$map:(width:$width,height:$height);
+$className:container;
+p{
+    color:$color;
+    height:$height;
+}
+
+.menu{
+    padding:$padding;
+    padding-top:nth($padding,2);
+    width:$width;
+}
+.panel{
+    width:map-get($maps,width);
+    height:map-get($maps,height);
+}
+##{$className}{
+    height:map-get($map,height);
+    width:map-get($map,width);
+}
+
+
+//嵌套
+
+
+//1.选择器嵌套
+.class1{
+    height:10px;
+    .class2{
+        width:10px;
+    }
+}
+
+//2.属性嵌套
+
+.class3{
+    background:{
+        color:red;
+        size:100% 50%;
+    }
+}
+
+//3.&  --引用父选择器
+
+.class4{
+    color:red;
+    &:hover{
+        color:green;
+    }
+}
+
+//4.@at-root 跳出嵌套
+
+#container{
+    
+    font-size:14px;
+    
+    .nav{
+        color:yellow;
+    }
+    
+    @at-root .panel{
+        color:red;
+    }
+    
+    @media screen and (max-width:1200px){
+        .nav{
+            width:100px;
+        }
+        
+        //只跳出了 #container 没有跳出@media
+        @at-root .footer{
+            width:100px;
+        }
+        //跳出了media 没有跳出#container
+        @at-root(without: media){
+            .foot{
+                width:10px;
+            }
+        }
+        //跳出#container 并且跳出了midia
+        @at-root(without: media rule){
+            .foot{
+                width:20px;
+            }
+        }
+                
+    }
+    
+    @at-root .text-info{
+        color:red;
+        //引用并且跳出
+        @at-root .nav &{
+            color:blue;
+        }
+    }
+    
+        
+}
+
+
+//继承
+
+/*!1.继承与多继承*/
+
+.alert{
+    background-color:red;
+}
+
+.small{
+    font-size:13px;
+}
+
+.alert-info{
+    //简单继承
+    @extend .alert;
+    color:blue;
+}
+
+.alert-success{
+   //多继承
+    @extend .alert,.small;
+}
+
+/*!链式继承*/
+
+.one{
+    color:red;
+}
+.two{
+    @extend .one;
+    font-size:12px;
+}
+.three{
+    @extend .two;
+    font-weight:bold;
+}
+
+/*!交叉继承*/
+
+a span{
+    font-size:12px;
+}
+
+div .content{
+    @extend span;
+}
+
+/*!继承作用域*/
+//Sass::SyntaxError: You may not @extend an outer selector from within @media.
+@media sreen and(max-width:300px){
+    .five{
+        //@extend .three;
+        font-size:10px;
+    }
+    
+    
+}
+
+
+/*!站位选择器*/
+%msg{
+    font-size:12px;
+}
+
+.class5{
+    @extend %msg;
+    color:green;
+    
+}
+
+
+/*!数据*/
+
+/*!1.Number类型*/
+
+.class6{
+    $font:12;
+    $font1:1.2;
+    $font2:12px;
+    font:$font + px;
+}
+
+/*!2.String类型*/
+$name:'calls';
+$name:"call";
+$name:call;
+
+/*!3.Bole类型*/
+$bt:true;
+$bf:false;
+
+/*!4.Color类型*/
+$color:red;
+$color:#f9f;
+
+/*!5null.类型*/
+
+$s:null;

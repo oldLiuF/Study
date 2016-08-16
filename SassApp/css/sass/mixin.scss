@@ -1,0 +1,20 @@
+@mixin box-shadow($shadow:2px){
+    -moz-box-shadow:$shadow;
+    -webkit-box-shadow:$shadow;
+    box-shadow:$shadow;
+}
+
+.box-shadow{
+    @include box-shadow(4px);
+}
+
+//针对iPhone
+@mixin style-for-iphone{
+    @media only screen and (min-device-width:320px) and (max-device-width:568px){
+        @content;
+    } 
+}
+
+@include style-for-iphone{
+    font-size:12px;
+}

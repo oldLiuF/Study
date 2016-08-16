@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="scripts/vue.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <ul>
+        <li v-for="todo in todos">
+            {{ todo.text }}
+        </li>
+    </ul>
+</div>
+
+<script>
+    
+    window.onload = function() {
+        
+        new Vue({
+            el: '#app',
+            data: {
+                todos: [
+                    { text: 'Learn HTML and CSS' },
+                    { text: 'Learn JavaScript' },
+                    { text: 'Learn Vue.js'},
+                    { text: 'Build Something Awesome'}
+                ]
+            }
+        })
+
+        
+    };
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+
+
+
+
+$bgColorMap:(info:lightblue,warning:red,danger:lightyellow,success:lightgreen);
+$emColorMap:(info:darkblue,warning:red,danger:lightyellow,success:lightgreen);
+$colorMap:(info:darkblue,warning:red,danger:lightyellow,success:lightgreen);
+//函数 设置背景色
+@mixin setBgColor($bgcolor){
+    background:$bgcolor;
+}
+
+.alert{
+    width:500px;
+    height:80px;
+    line-height:80px;
+    text-indent:10px;
+    border:1px solid transparent;
+    border-radius:4px;
+    em{
+        font-weight: bold;
+        font-style:normal;
+        font-size:15px;
+        font-family: "微软雅黑";
+    }    
+}
+
+.alert-info{
+    color:map-get($colorMap,info);
+    background:map-get($bgColorMap,info);
+    em{
+        color:map-get($emColorMap,info);
+    }
+}
+.alert-warning{
+    background:map-get($bgColorMap,warning);
+}
+.alert-success{
+    background:map-get($bgColorMap,success);
+}
+.alert-danger{
+    background:map-get($bgColorMap,danger);
+}
