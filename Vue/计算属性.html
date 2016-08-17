@@ -8,22 +8,35 @@
 <body>
 
 <div id="app">
-    <p>{{ message }}</p>
-    <button v-on:click="reverseMessage">Reverse Message</button>
+    <input v-model="num1">+<input v-model="num2">=<input type="text" v-model="sum" >
 </div>
 
 <script>
     
     window.onload = function() {
         
-        new Vue({
+        var vm = new Vue({
             el: '#app',
             data: {
-                message: 'Hello Vue.js'
+                num1: 1,
+                num2: 2
             },
-            methods: {
-                reverseMessage: function() {
-                    this.message = this.message.split(' ').reverse().join(' ');
+            computed: {
+                // 一个计算属性的getter
+                sum: {
+                    
+                    // setter
+                    set: function(newValue) {
+                        // 如果这个也双向绑定了，会把数据实时同步
+                        var val = Number(newValue);
+                        this.num1 = val/2;
+                        this.num2 = val/2;
+                    },
+
+                    // getter
+                    get: function() {
+                        return Number(this.num1) + Number(this.num2);
+                    }
                 }
             }
         });

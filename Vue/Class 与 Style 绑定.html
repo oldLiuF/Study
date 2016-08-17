@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        .box {
+
+            border: 1px solid black;
+            width: 100px;
+            height: 100px;
+
+        }
+
+        .color {
+            color: red;
+        }
+
+        .backgroundColor {
+            background-color: yellow;
+        }
+    </style>
+    <script type="text/javascript" src="scripts/vue.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <!-- v-bind:class使用 1.对象语法   -->
+    <div class="box" v-bind:class="{ 'color': isA, 'backgroundColor': isB }">
+        Hello Vue.js
+    </div>
+    <!-- 也可以直接绑定一个对象 ,对象 key 值就是 class, true 和 false 判断是否添加该 class -->
+    
+    <div class="box" v-bind:class="classObject">
+        Hello Vue.js
+    </div>
+
+    <button v-on:click="changeA">{{ isA }}</button>  <button v-on:click="changeB">{{ isB }}</button>
+</div>
+
+<script>
+    
+    window.onload = function() {
+        
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                isA: true,
+                isB: true,
+                classObject: {
+                    'color': true,
+                    'backgroundColor': true
+                }
+            },
+            methods: {
+                changeA: function(a) {
+                    this.isA = !this.isA;
+                },
+                changeB: function() {
+                    this.isB = !this.isB;
+                }
+            }
+        });
+
+        
+    };
+
+</script>
+
+</body>
+</html>
