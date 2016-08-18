@@ -1,0 +1,219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title></title>
+		<style type='text/css'>
+
+			body {
+				margin: 0;
+				font-size: 15px;
+			}
+			a {
+				text-decoration: none;
+			}
+			.box {
+
+
+				margin: 0 auto;
+				margin-top: 100px;
+
+				width: 240px;
+				height: 430px;
+				
+				text-align: center;
+
+				border: 2px solid black;
+				border-radius: 5px;
+			}
+
+			.content {
+
+				border-bottom: 1px solid red;
+
+				width: 230px;
+				height: 380px;
+				overflow: ; 
+				overflow-y: auto;
+
+			}
+
+			.textbox {
+
+				/*background-color: gray;*/
+
+				padding: 8px 4px;
+				width: 232px;
+				height: 33px;
+			}
+			
+			.img, .input, .confirm {
+				float: left;
+
+				/*height: 36px;*/
+			}
+
+
+			.textbox .img {
+
+				margin-right: 3px;
+				width: 36px;
+				height: 33px;
+
+				border: 1px solid gray;
+				border-radius: 2px;
+			}
+			
+			.textbox .input {
+				
+				margin-right: 3px;
+				width: 150px;
+				height: 33px;
+
+				border: 1px solid gray;
+				border-radius: 2px;
+
+				font-size: 13px;
+			}
+
+			.input input {
+				outline: none;
+				border: 0 none;
+
+				width: 150px;
+				height: 30px;
+			}
+
+			.textbox .confirm {
+				height: 33px;
+				width: 33px;
+			}
+
+			.confirm a{
+				display: block;
+				
+				height: 33px;
+				width: 33px;
+
+				text-align: center;
+				line-height: 33px;
+				color: gray;
+			}
+
+			.content .king {
+				background-color: green;
+				color: white;
+			}
+
+			.content .soldier {
+				background-color: gray;
+				color: black;
+			}
+
+			.img .king {
+
+			}
+
+			.img .soldier {
+				
+			}
+
+			.fl, .fr {
+				margin-bottom: 4px;
+				width:210px;
+			}
+
+			.fl * {
+				float: left;
+			}
+
+			.fr * {
+				float: right;
+			}
+
+			.fr div, .fl div {
+				max-width: 180px;
+
+				text-align: left;
+				line-height: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div class="box" >
+
+			<div class="content" id="content">
+				
+			</div>
+			<div class="textbox">
+				<div class="img">
+					<img src="images/001.png" alt="" class="king" id="img">
+				</div>
+				<div class="input">
+					<input type="text" id="input">
+				</div>
+				<div class="confirm">
+					<a href="javascrip:;" id="confirm">确认</a>
+				</div>
+			</div>
+		</div>
+		
+	
+
+		<script type='text/javascript'>
+			window.onload = function() {
+
+				var oContent = document.getElementById('content');
+				var oImg = document.getElementById('img');
+				var oInput = document.getElementById('input');
+				var oConfirm = document.getElementById('confirm');
+
+				oImg.onclick = function() {
+					
+					if (this.className === "king") {
+
+						this.className = 'soldier';
+						this.src = 'images/002.png';
+
+					} else if(this.className === 'soldier') {
+
+						this.className = 'king';
+						this.src = 'images/001.png';
+
+					}
+
+				};
+
+				oConfirm.onclick = function() {
+
+					if(oInput.value.trim() === '') {
+						alert('输入能为空');
+						return;
+					}	
+					var val = oInput.value,
+						html = oContent.innerHTML,
+						inp;
+
+
+
+
+
+					if(oImg.className === 'soldier'){
+
+						inp = '<div class="fl" style="overflow:hidden;"><img src="'+ oImg.src +'" alt="" /><div class='+ oImg.className +'>'+ val +'</div></div>'
+
+					} else if(oImg.className === 'king') {
+						inp = '<div class="fr" style="overflow:hidden;"><img src="'+ oImg.src +'" alt="" /><div class='+ oImg.className +'>'+ val +'</div></div>'
+					}
+
+					oContent.innerHTML = html + inp;
+
+				};
+
+			}
+		</script>
+	</body>
+</html>
