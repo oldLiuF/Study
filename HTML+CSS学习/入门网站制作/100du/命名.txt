@@ -1,0 +1,21 @@
+
+header
+
+nav
+
+search
+
+main
+
+	main-content
+		
+		section
+		opctions
+		main-ad
+		
+	side
+		
+		side-section
+		side-ad
+
+footer

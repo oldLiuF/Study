@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title></title>
+	<meta charset='utf-8'>
+	<style type='text/css'>
+		.container{
+			border: 1px solid #000;
+			background-color: red;
+			/*float: left;*/
+			/*display: inline-block;*/
+			/*margin: 0 auto;*/
+			/*width:400px;*/
+		}
+		.box{
+			width: 300px;
+			height: 300px;
+			background-color: yellow;
+			float: left;
+
+		}
+
+		.clearfix{
+			
+		}
+		.clearfix:after{
+			content: "";  /*生成一个没有一个内容的块状元素*/
+			display: block; /* 只有块状元素才能清除浮动 */
+			clear: both;
+		}
+	</style>
+</head>
+<body>
+	
+    <!-- 
+    	1.因为浮动原因 box脱离标准文档流 比container高出层级 使得container没有撑起来
+
+		解决方案.
+			1.添加br标签 并添加 clear属性  （不符合文档的可读性，标签语义化等）
+			2.添加一个空标签 并添加一个 clear: both (同样可读性不高)
+			3.向父级元素添加float （页面维护极差，并且布局混乱，没有设置宽高的父级以内容填充大小）
+			4.父级设置display:inline-block 通样会按内容填充父级 同时 margin auto 会失效
+     -->
+
+
+	<div class="container  clearfix">
+
+		<div class="box">
+			
+		</div>
+		<!-- <div class="clearfix"></div> -->
+		<!-- <br clear="all" /> -->
+
+	</div>
+</body>
+</html>

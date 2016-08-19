@@ -1,0 +1,30 @@
+
+.fl {
+	float: left;
+}
+
+.fr {
+	float: right;
+}
+
+.clear {
+	zoom: 1;
+}
+
+.clear:after {
+	content: "";
+	display: block;
+	clear: both;
+	height: 0;
+}
+
+.gradient {
+				/* 渐变  第一参数不写默认为 top  开始颜色 结束颜色 */
+	background: -webkit-linear-gradient(#fff,#f9f9f9);
+	background: -moz-lienar-gradient(#fff,#f9f9f9);
+	background: linear-gradient(#fff,#f9f9f9);
+}
+
+.mc {
+	margin: 0 auto;
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+
+		body {
+			margin: 0;
+		}
+		
+		.clear: {
+			zoom: 1;
+		}
+
+		.clear:after {
+			content: "";
+			display: block;
+			clear: both;
+		}
+		
+		.fl {
+			float: left;
+		}
+
+		.fr {
+			float: right;
+		}
+
+
+		.container {
+			margin: 0 auto;
+			width: 600px;
+			background-color: black;
+		}
+
+        .box1 {
+            border: 1px solid black;
+            height:100px;
+            width: 200px;
+            background-color: yellow;
+            /*margin-bottom: 10px;*/
+        }
+
+        .box2 {
+        	border: 1px solid black;
+            height:100px;
+            width: 200px;
+            background-color: red;
+            margin-bottom: 10px;
+        } 
+    </style>
+</head>
+<body>
+
+
+	<!-- ie7下 最后一个浮动元素的实际高度决定 父容器的高度 -->
+	<div class="container clear">
+		<div class="box1 fl">
+        
+    	</div>
+    	<div class="box2 fr">
+    		
+    	</div>
+	</div>
+
+</body>
+</html>
