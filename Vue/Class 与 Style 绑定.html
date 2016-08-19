@@ -1,15 +1,29 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html>
 <head>
     <meta charset="UTF-8">
     <title></title>
     <style>
+        body, p{
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-size: 15px;
+        }
+        
+        #app {
 
+        }
         .box {
 
+            margin: 0 auto ;
             border: 1px solid black;
-            width: 100px;
-            height: 100px;
+            width: 600px;
+            height: 160px;
+
+            text-align: center;
+            line-height: 80px; 
 
         }
 
@@ -26,17 +40,44 @@
 <body>
 
 <div id="app">
-    <!-- v-bind:class使用 1.对象语法   -->
+    <p><button v-on:click="changeA">{{ isA }}</button>  <button v-on:click="changeB">{{ isB }}</button></p>
+    <!-- v-bind:class -->
+
+    <!-- 1.对象语法   -->
     <div class="box" v-bind:class="{ 'color': isA, 'backgroundColor': isB }">
-        Hello Vue.js
+       <pre> <code>v-bind:class="{ 'color': isA, 'backgroundColor': isB }"</code></pre>
     </div>
     <!-- 也可以直接绑定一个对象 ,对象 key 值就是 class, true 和 false 判断是否添加该 class -->
     
     <div class="box" v-bind:class="classObject">
-        Hello Vue.js
+        <p> v-bind:class="classObject" </p>
+        <p> 
+            <code>
+                classObject: {
+                    color: true,
+                    backgroundColor: true
+                }
+            </code>
+        </p>
     </div>
 
-    <button v-on:click="changeA">{{ isA }}</button>  <button v-on:click="changeB">{{ isB }}</button>
+    <!-- 也可以添加一个数组 -->
+    <div class="box" v-bind:class="['color', 'backgroundColor']">
+       <code> v-bind:class="['color', 'backgroundColor']"</code>
+    </div>
+
+    <!-- v-bind:style -->
+    <!--  1.对象语法十分直观——看着非常像 CSS，其实它是一个 JavaScript 对象。CSS 属性名可以用驼峰式（camelCase）或短横分隔命名（kebab-case）： -->
+    <!-- v-bind:style="{ color: 若不为对象则不会起作用, backgroundColor: backgroundColor } -->
+    <div class="box" v-bind:style="{ color: activeColor, backgroundColor: backgroundColor }">
+       <code> v-bind:style="{ color: activeColor, backgroundColor: backgroundColor }"</code>
+    </div>
+
+    <div class="box" v-bind:style="styleObject">
+       <code> v-bind:class="styleObject"</code>
+    </div>   
+
+    
 </div>
 
 <script>
@@ -51,6 +92,13 @@
                 classObject: {
                     'color': true,
                     'backgroundColor': true
+                },
+
+                activeColor: 'gray',
+                backgroundColor: 'lightyellow',
+                styleObject: {
+                    color: 'red',
+                    fontSize: '20px'
                 }
             },
             methods: {
