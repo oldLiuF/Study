@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style>
+		.box{
+			border: 1px solid black;
+			height:300px;
+			width: 300px;
+		}
+	</style>
+	<script src="scripts/jquery-1.11.0.js"></script>
+</head>
+<body>
+	<div class="box">
+		<form action="" id="form1">
+			<table>
+				<tr>
+					<td>性别：</td>
+					<td>
+						男<input type="radio" value="男" name="gender">
+						女<input type="radio" value="女" name="gender">
+					</td>
+				</tr>
+				<tr>
+					<td>年龄：</td>
+					<td>
+						13<input type="radio" value="13" name="age">
+						14<input type="radio" value="14" name="age">
+						15<input type="radio" value="15" name="age">
+						16<input type="radio" value="16" name="age">
+					</td>
+				</tr>
+				<tr>
+					<td>test1：</td>
+					<td>
+						1<input type="checkbox" value="1" name="test1">
+						2<input type="checkbox" value="2" name="test1">
+					</td>
+				</tr>
+				<tr>
+					<td>test2：</td>
+					<td>
+						1<input type="radio" value="1" name="test2">
+						2<input type="radio" value="2" name="test2">
+					</td>
+				</tr>
+				<tr>
+					<td>test3：</td>
+					<td>
+						<input type="text" value="" name="test3">
+						<input type="text" value="" name="test3">
+					</td>
+				</tr>
+				<tr>
+					<td>test4：</td>
+					<td>
+						<select name="test4">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>test2：</td>
+					<td>
+						1<input type="checkbox" value="1" name="test2">
+						2<input type="checkbox" value="2" name="test2">
+					</td>
+				</tr>
+				<tr>
+					<td>test4：</td>
+					<td>
+						男<input type="checkbox" value="男" name="gender">
+						女<input type="checkbox" value="女" name="gender">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<input  id="btn1" type="button" value="点击模拟后台传递值" >
+	<input id="btn2" type="button" value="点击获取form表单的值">
+	<script type="text/javascript">
+		$(function() {
+			//模拟后台传递的数据
+			var jsonData = { 
+				gender: "男",
+				age: "13", 
+				test1: 2,
+				test2: 1, 
+				test3: "这是测试", 
+				test4: 2
+			},
+				$btn1 = $('#btn1'),
+				$btn2 = $('#btn2'),
+				$form = $('#form1');
+			
+			//alert(1);
+
+			$btn2.on('click', function() {
+				console.log($form.serializeArray());
+				console.log($form.serialize());
+			});
+
+			$btn1.on('click', function() {
+				$form.setForm(jsonData);
+			});
+
+
+			/**
+			 * 填充选择元素内对应json里key el[name=key]  
+			 * @param {obj} json对象，不能传递数组
+			 */
+			$.fn.setForm = function(json) {
+				var obj = this, // 
+					type, // 元素type类型
+					$elements,
+					$filterEl,
+					$arrEle; //
+
+				// 获取所有含有name的元素
+				$arrEle = $(this).find('*[name]');
+
+				for(var key in json) {
+
+					$elements = $arrEle.filter('*[name='+ key +']');
+
+					if($elements[0].nodeName.toLowerCase() === "input"){
+
+						type = $elements[0].type;
+
+						switch(type) {
+							case 'radio':
+								$filterEl = $elements.filter('input[type="radio"][value='+ json[key] +']')[0];
+								$filterEl ? $filterEl.checked = true : false;	
+								break;
+							case 'checkbox':// 过滤
+								$filterEl = $elements.filter('input[type="checkbox"][value='+ json[key] +']')[0];
+								$filterEl ? $filterEl.checked = true : false;	
+								break;
+							case 'text':
+							 	$elements.val(json[key]); 
+							 	break;
+						}
+						// 下拉列表
+					} else if($elements[0].nodeName.toLowerCase() === "select") {
+
+						$elements.val(json[key]);
+
+					}
+					//移除
+					$arrEle = $arrEle.not($elements);
+
+				}
+			};
+
+		});
+	</script>
+</body>
+</html>

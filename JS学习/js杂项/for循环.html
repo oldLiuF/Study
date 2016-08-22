@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body>
+		
+
+		
+		<script type='text/javascript'>
+			
+//			var n = 9;			
+			
+//			for(var  i = 0;i<n;i++){
+//				console.log(i);
+//			}
+			
+/*			for(var i=0;i<20;i++){
+				for(var j=0;j<33;j++){
+					for(var k =0;k<100;k++){
+						if((i+k+j==100)&&(i*5+j*3+k/3==100)){
+							console.log('i：'+i+' j：'+j+' k：'+k);
+						}
+					}
+				}
+			}*/
+			
+			for(var i =0;i<20;i++){
+				for(var j=0;j<33;j++){
+					var k = 100-i-j;
+					if((k%3==0)&&(i*5+j*3+k/3==100)){
+						console.log('i：'+i+' j：'+j+' k：'+k);
+					}
+				}
+			}
+			
+			
+			
+			for(var i = 0;i<s_object.length;i++){
+				
+				var $oBtn = $('<input type='button'/>');
+				$oBtn.val(s_object[i].id);
+				$('#btnSubmit').append($oBtn);
+			}
+			
+			
+			
+			
+			
+		</script>
+	</body>
+</html>

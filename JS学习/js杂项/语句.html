@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+</head>
+<body>
+	<script type="text/javascript">
+		//label 语句 配合break 和 continue
+		
+		var num = 0;
+
+		start: for (var i = 0; i < 10; i++) {
+
+			mid: for(var j = 0; j < 10; j++){
+				
+				if(i == 5 && j == 5){
+					continue start;
+				}
+				num++;
+
+			}
+
+		};
+
+		console.log(num); // 95
+
+
+
+		 num = 2;
+
+		switch(true){
+			case num < 10:
+				console.log(1);
+				break;
+			case num > 10 && num < 22:
+				console.log(2);
+				break;
+			case num >22 && num < 33:
+				console.log(3);
+				break;
+			default :
+				console.log(4);
+				break;
+		}
+ 		
+		
+
+
+
+
+	</script>
+</body>
+</html>

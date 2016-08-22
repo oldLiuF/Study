@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<h1 id='h1'>hello world</h1>
+		
+		
+		<ul id="ul">
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+			<li>6</li>
+			<li>7</li>
+			<li>8</li>
+			<li>9</li>
+			<li>10</li>
+		</ul>
+		
+		<script type="text/javascript">
+			(function(){
+				var oH1 = document.getElementById('h1');
+				//alert(oH1);
+				
+				
+				var oUl = document.getElementById('ul');
+				var aLi = oUl.getElementsByTagName('li');
+				
+				var obj = {};
+//				console.log(obj);
+				
+				var obj1 = {
+					name:'xiao liu',
+					age:'21',
+					gender:'nan',
+					
+				};
+				
+//				console.log(typeof obj1);
+				
+				
+				function Person(name,age){
+					this.Name = name;
+					this.Age = age;
+				}
+				
+				var person = new Person('oldL',12);
+				
+//				console.log (person instanceof Person);
+				
+				var obj2 = new Object();
+				
+				var arr= new Array();
+				
+				var date = new Date();
+				
+				var str = new String();
+				
+				var reg = new RegExp();
+				
+				var man = Object.create({gender:'男'});
+				
+				//对象
+			    //属性特性
+//			    1.writable 可写的
+//			    2.enumerable 可枚举
+//			    3.configurable 可配置的
+//			    4.getter
+//			    5.setter 
+				
+				//对象的三个特性
+//				[[proto]]    对象的原型
+//				[[class]]    对象的类 
+//				[[extensible]] 可扩展的
+
+
+
+				//var obj5 = {x:1,y:2};
+				
+				function foo(){}
+				foo.prototype.z = 3;
+				
+				var obj5 =new foo();
+				obj5.a = 1;
+				obj5.b = 2;
+				
+				obj5.z = 11;
+				console.log(obj5.z);
+				delete obj.z;
+				console.log(obj5.z);
+				
+				//用 in 来检测对象是否有这个属性 本对象没有会往原型上找
+				//console.log('a' in obj5);
+			})();
+		</script> 
+	</body>
+</html>
