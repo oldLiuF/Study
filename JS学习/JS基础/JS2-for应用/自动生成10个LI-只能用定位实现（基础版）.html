@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title></title>
+		<style type='text/css'>
+
+			
+			
+			body {
+				margin: 0;
+				font-size: 30px;
+			}
+
+			.box {
+				position: absolute;
+				
+				border: 1px solid gray;
+				width: 100px;
+				height: 100px;
+
+				line-height: 100px;
+				text-align: center;
+			}
+			
+		</style>
+	</head>
+	<body>
+	
+		<div class="box"></div>
+		
+		<script type='text/javascript'>
+			window.onload = function() {
+				
+				var arrBgc = ['red', 'blue', 'green', 'yellow', 'gray', 'white'],
+					aDiv = document.getElementsByTagName('div'),
+					arrLen = arrBgc.length,
+					len = 10,
+					i,
+					str = '';
+
+				for (i = 0; i < len; i++) {
+					str += '<div class="box">' + (i + 1) + '</div>';
+				};
+
+				document.body.innerHTML = str;
+
+				for(i = 0; i < len; i++) {
+					aDiv[i].style.backgroundColor = arrBgc[i % arrLen];
+					aDiv[i].style.left = i * 110 + 'px';
+					aDiv[i].onclick = function(ev,i) {
+						alert(i);
+					};
+				}
+
+
+
+
+
+			}
+		</script>
+	</body>
+</html>

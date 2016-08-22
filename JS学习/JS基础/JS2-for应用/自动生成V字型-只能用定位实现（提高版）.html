@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title></title>
+		<style type='text/css'>
+
+			h3, p {
+				margin: 0;
+			}
+			
+			body {
+				margin: 0;
+				font-size: 12px;
+			}
+			a {
+				text-decoration: none;
+			}
+
+			.container {
+				margin: 0 auto;
+				margin-top: 200px;
+				width: 420px;
+				height: 500px;
+			}
+
+			.operation {
+				width: 420px;
+				height: 80px;
+
+			}
+			.operation p {
+				text-align: center;
+			}
+
+			.operation h3 {
+
+				padding: 20px;
+
+				text-align: center;
+			}
+
+			.box {
+				position: relative;
+				
+				border: 10px solid gray;
+				width: 400px;
+				height: 400px;
+
+				background-color: black;
+			}
+
+			.box .display {
+				width: 400px;
+				height: 400px;
+			}
+
+			.box .display img {
+				width: 400px;
+				height: 400px;
+			}
+
+			.box .control {
+				position: absolute;
+				top: 0;
+				left: 0;
+
+				width: 400px;
+				height: 400px;
+
+				cursor: pointer;
+			}
+
+			.control .prev, .control .next {
+				display: block;
+
+				position: absolute;
+				top: 170px;
+
+				width: 40px;
+				height: 40px;
+				
+				text-align: center;
+				line-height: 40px;
+				color: black;
+				background-color: #fff;
+
+				opacity: 0.7;
+
+			}
+
+			.control .prev:hover, .control .next:hover {
+				opacity: 0.4;
+			} 
+			
+			.control .prev {
+				left: 10px;
+			}
+
+			.control .next {
+				right: 10px;
+			}
+
+			.control .disc, .control .num {
+				position: absolute;
+				left: 0;
+
+				width: 100%;
+				height: 30px;
+
+				background-color: #080808;
+				opacity: 0.8;
+
+				color: white;
+				text-align: center;
+				line-height: 30px;
+			}
+	
+			.control .num {
+				top: 0;
+			}
+
+			.control .disc {
+				bottom: 0;
+			}
+
+			
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="operation">
+				<p>
+					<input type="button" value="顺序切换" id="order">
+					<input type="button" value="循环切换" id="loops">
+				</p>
+				<h3>图片只能顺序切换</h3>
+			</div>
+			<div class="box" >
+				<div class="display" id="display">
+					<img id="img" src="" alt="" >
+				</div>
+				<div class="control">
+					<div class="num" id="num">加载中。。。</div>
+					<span class="prev" id="prev"><</span>
+					<span class="next" id="next">></span>
+					<div class="disc" id="disc">加载中。。。</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		<script type='text/javascript'>
+			window.onload = function() {
+				
+				
+
+				var oOrder = document.getElementById('order'),
+					oLoops = document.getElementById('loops'),
+					oPrev = document.getElementById('prev'),
+					oNext = document.getElementById('next'),
+                    oImg = document.getElementById('img'),
+                    oNum = document.getElementById('num'),
+                    oDisc = document.getElementById('disc'),
+                    jsonData = [ {
+                    	src: "images/1.jpg", disc: "这是第一张图片", num: 1
+                    },{
+                    	src: "images/2.jpg", disc: "这是第二张图片", num: 2
+                    },{
+                    	src: "images/3.jpg", disc: "这是第三张图片", num: 3
+                    },{
+                    	src: "images/4.jpg", disc: "这是第四张图片", num: 4
+                    }/*,{
+                    	src: "images/05.jpg", disc: "这是第五张图片", num: 5
+                    },{
+                    	src: "images/06.jpg", disc: "这是第六张图片", num: 6
+                    }*/ ],
+                    i = 0;
+
+                oImg.onOff = true;
+
+                action();
+
+                // 顺序切换
+				oOrder.onclick = function() {
+                    oImg.onOff = false;
+				};
+
+				oLoops.onclick = function() {
+                    oImg.onOff = true;
+				};
+
+                oPrev.onclick = function() {
+
+					i--;
+					if ( i === -1 ) {
+
+						if ( img.onOff ) {
+							i = jsonData.length - 1;
+						} else {
+							i = 0;
+							alert('已经到底啦');
+						}
+
+					}
+
+                	action();
+                };
+
+                oNext.onclick = function() {
+
+                	i++;
+
+                	if ( i === jsonData.length ) {
+                		if ( img.onOff ) {
+                			i = 0;
+                		} else {
+                			i = jsonData.length - 1;
+                			alert('已经到底啦');
+                		}
+                	}
+
+                	action();
+                };
+
+                function action() {
+                	
+                	oImg.src = jsonData[i]["src"];
+                	oDisc.innerHTML = jsonData[i]["disc"];
+                	oNum.innerHTML = jsonData[i]["num"] + '/' +  jsonData.length
+                }
+			}
+		</script>
+	</body>
+</html>
