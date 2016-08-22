@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body, p{
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-size: 15px;
+        }
+        
+        
+    </style>
+    <script type="text/javascript" src="scripts/vue.js"></script>
+</head>
+<body>
+
+<div id="app">
+<!-- v-if v-else 只能寄存在vue实例里使用 -->
+<h1 v-if="1 > 2">Yes</h1>
+<h1 v-else>No</h1>
+
+<h1 v-show="isTrue">v-show</h1>
+<button v-on:click="onClick">开关</button>
+</div>
+
+
+
+<script>
+    
+    window.onload = function() {
+        
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                isTrue: true
+            },
+            methods: {
+                onClick: function() {
+                    this.isTrue = !this.isTrue;
+                }
+            }
+        });
+
+        
+    };
+
+</script>
+
+</body>
+</html>
