@@ -75,7 +75,7 @@ Ext.define('ExtjsStudy.view.main.Main', {
         }
     },
 
-    items: [{
+    items: [/*{
         title: 'Home',
         iconCls: 'fa-home',
         // The following grid shares a store with the classic version's grid as well!
@@ -100,5 +100,7 @@ Ext.define('ExtjsStudy.view.main.Main', {
         bind: {
             html: '{loremIpsum}'
         }
+    },*/ {
+        xtype: 'gridpaneltest'
     }]
 });
