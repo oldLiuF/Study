@@ -879,6 +879,7 @@ $include-ext-window-window: dynamic(true);;
 $include-extjsstudy-application: dynamic(true);;
 $include-extjsstudy-model-test: dynamic(true);;
 $include-extjsstudy-store-personnel: dynamic(true);;
+$include-extjsstudy-view-common-fileuploadcomponent-fileuploadcomponent: dynamic(true);;
 $include-extjsstudy-view-grid-gridpaneltest: dynamic(true);;
 $include-extjsstudy-view-grid-gridpaneltestcontroller: dynamic(true);;
 $include-extjsstudy-view-grid-gridpaneltestmodel: dynamic(true);;
@@ -886,6 +887,7 @@ $include-extjsstudy-view-main-list: dynamic(true);;
 $include-extjsstudy-view-main-main: dynamic(true);;
 $include-extjsstudy-view-main-maincontroller: dynamic(true);;
 $include-extjsstudy-view-main-mainmodel: dynamic(true);;
+$include-mynamespace-fileuploadcomponentcontroller: dynamic(true);;
 $output-paths: ("path": "../../classic/resources", "shared": "../../resources");
 
 /* ======================== ETC ======================== */

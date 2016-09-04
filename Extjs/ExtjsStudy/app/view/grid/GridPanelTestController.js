@@ -3,10 +3,10 @@ Ext.define('ExtjsStudy.view.grid.GridPanelTestController', {
 
     alias: 'controller.gridpaneltest',
     init: function(view) {
-        debugger;
+        // debugger;
     },
     afterRender: function(view) {
-        debugger;
+        // debugger;
         var grid = view.lookupReference('grid'),
             tip = Ext.create('Ext.tip.ToolTip', {
                 target: grid.getView().el,

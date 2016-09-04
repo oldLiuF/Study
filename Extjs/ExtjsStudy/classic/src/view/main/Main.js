@@ -15,7 +15,8 @@ Ext.define('ExtjsStudy.view.main.Main', {
 
         'ExtjsStudy.view.main.MainController',
         'ExtjsStudy.view.main.MainModel',
-        'ExtjsStudy.view.main.List'
+        'ExtjsStudy.view.main.List',
+        'ExtjsStudy.view.common.fileuploadcomponent.FileuploadComponent'
     ],
 
     controller: 'main',
@@ -102,5 +103,7 @@ Ext.define('ExtjsStudy.view.main.Main', {
         }
     },*/ {
         xtype: 'gridpaneltest'
+    }, {
+        xtype: 'fileuploadcomponent'
     }]
 });
