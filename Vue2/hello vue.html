@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body, p{
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-size: 15px;
+        }
+        
+        /*DADADA*/
+        .box {
+            border: 1px solid #DADADA;
+            border-radius: 2px;
+            padding: 1.5em;
+            width: 40em;
+
+            line-height: 0.8em;
+            
+
+            background-color: #F8F8F8;
+        }
+
+        .mc {
+            margin: 4em auto;
+        }
+        
+    </style>
+    <script type="text/javascript" src="scripts/vue.js"></script>
+</head>
+<body>
+        
+
+
+    <div id='app' class='box mc'>
+        {{message}}
+    </div>
+
+    <div id='app-2' class='box mc'>
+        <span v-bind:title="message">
+            Hover your mouse over me for a few seconds to see my dynamically bound title
+        </span>
+    </div>
+
+    <div id="app-3" class="box mc">
+        <p v-if="seen">Now you see me</p>
+    </div>
+    
+    <div id="app-4" class="box mc">
+        <ol>
+            <li v-for="todo in todos">
+                {{ todo.text }}
+            </li>
+        </ol>
+    </div>
+
+    <div id="app-5" class="box mc">
+        <p>{{ message }}</p>
+        <button v-on:click="reverseMessage">Reverse Message</button>
+    </div>
+    
+    <div class="box mc" id="app-6">
+        <p>{{ message }}</p>
+        <input type="text" v-model="message">
+    </div>
+    
+    <div class="box mc" id="app-7">
+        <ol>
+            <todo v-for="todo in todos" v-bind:todo="todo"></todo>
+        </ol>
+    </div>
+
+<script>
+    
+    window.onload = function() {
+        
+        // 声明式渲染
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello Vue.js!'
+            }
+        });
+
+        var app2 = new Vue({
+            el: '#app-2',
+            data: {
+                message: 'You loaded this page on' + new Date()
+            }
+        });
+
+        // 条件与循环
+        var app3 = new Vue({
+            el: '#app-3',
+            data: {
+                seen: true
+            }
+        });
+
+        var app4 = new Vue({
+            el: '#app-4',
+            data: {
+                todos: [
+                    { text: 'Learn Javascript' },
+                    { text: 'Learn Vue' },
+                    { text: 'Bulid something awesome' }
+                ]
+            }
+        });
+
+        // 处理用户的输入
+        var app5 = new Vue({
+            el: '#app-5',
+            data: {
+                message: 'Hello Vue.js!'
+            },
+            methods: {
+                reverseMessage: function() {
+                    // reverse() 数据倒序
+                    this.message = this.message.split(' ').reverse().join(' ');
+                }
+            }
+        });
+
+        var app6 = new Vue({
+            el: '#app-6',
+            data: {
+                message: 'Hello Vue.js!'
+            }
+        });
+
+
+        // 用组件构建（应用）
+        Vue.component('todo', {
+            props: ['todo'],
+            template: '<li>{{ todo.text }}</li>'
+        });
+
+        var app7 = new Vue({
+            el: '#app-7',
+            data: {
+                todos: [
+                    { text: 'Learn Javascript' },
+                    { text: 'Learn Vue' },
+                    { text: 'Bulid something awesome' }
+                ]
+            }
+        })
+
+    };
+
+</script>
+
+</body>
+</html>
