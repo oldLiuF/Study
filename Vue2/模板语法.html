@@ -34,35 +34,24 @@
 </head>
 <body>
         
-    <div class="box mc" id="example">
-        <p>{{ a }}</p>
-        <input type="text" v-model="a">
+    <div class="box mc" id="app-1">
+        <p>Message: {{ msg }}</p>
+        <!-- v-once 指令 一次性赋值， 当值改变时，不会刷新 -->
+        <p v-once>v-once: {{ msg }}</p>
+        v-model: <input type="text" v-model="msg">
     </div>
 
 <script>
     
     window.onload = function() {
-        
-        var data = { a: 27 };
-        var vm = new Vue({
-            el: '#example',
-            data: data,
-
-            // 生命周期钩子
-            created: function() {
-                console.log('a is: ' + this.a);
+        var app = new Vue({
+            el: '#app-1',
+            data: {
+                msg: 'Hello world'，
+                status: false
             }
         });
-        debugger;
 
-        vm.$watch('a', function(newVal, oldVal) {
-            debugger;
-
-            this.a = newVal;
-        })
-
-        // vm.$data === data
-        // vm.$el === document.getElementById('example')
     };
 
 </script>
