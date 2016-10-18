@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title></title>
     <style>
-        body, p{
+        body{
             margin: 0;
             padding: 0;
         }
@@ -20,8 +20,7 @@
             width: 40em;
 
             line-height: 0.8em;
-            
-
+        
             background-color: #F8F8F8;
         }
 
@@ -38,7 +37,12 @@
         <p>Message: {{ msg }}</p>
         <!-- v-once 指令 一次性赋值， 当值改变时，不会刷新 -->
         <p v-once>v-once: {{ msg }}</p>
-        v-model: <input type="text" v-model="msg">
+        v-model: <input type="text" v-model="msg"> <button v-bind:disabled="status">Button</button>
+        <!-- javascript 表达式 -->
+        <p>javascript 表达式：{{typeof Number(number) === 'number' ? number * 2 : 0 }}</p>
+        number: <input type="text" v-model="number">
+        <!-- 过滤器 -->
+        <p>过滤器：{{ msg | capitalize }}</p>
     </div>
 
 <script>
@@ -47,8 +51,19 @@
         var app = new Vue({
             el: '#app-1',
             data: {
-                msg: 'Hello world'，
-                status: false
+                msg: 'Hello world',
+                status: true,
+                number: 2
+            },
+            filters: {
+                capitalize: function(value) {
+                    debugger;
+                    if (!value) {
+                        return '';
+                    }
+                    
+                    return value.split(' ').reverse().join(' ');
+                }
             }
         });
 
