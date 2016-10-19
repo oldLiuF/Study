@@ -42,7 +42,12 @@
         <p>javascript 表达式：{{typeof Number(number) === 'number' ? number * 2 : 0 }}</p>
         number: <input type="text" v-model="number">
         <!-- 过滤器 -->
-        <p>过滤器：{{ msg | capitalize }}</p>
+        <p>过滤器 默认参数：{{ msg | capitalize }}</p>
+        <p>过滤器 多参数：{{ msg | calculate('this', msg[msg.length-1]) }}</p>
+        <!-- 指令 -->
+        <p v-if="status">Now you see me</p>
+        <a v-bind:href="href">baidu</a>
+        <a href="javascript:;" v-on:click="doSomething">v-on:click</a>
     </div>
 
 <script>
@@ -53,7 +58,8 @@
             data: {
                 msg: 'Hello world',
                 status: true,
-                number: 2
+                number: 2,
+                href: 'https://www.baidu.com'
             },
             filters: {
                 capitalize: function(value) {
@@ -63,6 +69,16 @@
                     }
                     
                     return value.split(' ').reverse().join(' ');
+                },
+
+                calculate: function(arg1, arg2, arg3) {
+                    debugger;
+                    return arg1 + arg2 + arg3;
+                }
+            },
+            methods: {
+                doSomething: function() {
+                    alert(this.msg);
                 }
             }
         });
