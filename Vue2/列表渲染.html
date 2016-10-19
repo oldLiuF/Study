@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-size: 15px;
+        }
+        
+        /*DADADA*/
+        .box {
+            border: 1px solid #DADADA;
+            border-radius: 2px;
+            padding: 1.5em;
+            width: 40em;
+
+            line-height: 0.8em;
+        
+            background-color: #F8F8F8;
+        }
+
+        .mc {
+            margin: 4em auto;
+        }
+        
+    </style>
+    <script type="text/javascript" src="scripts/vue.js"></script>
+</head>
+<body>
+        
+    <div class="box mc" id="app-1">
+        <h5>#基本用法</h5>
+        <ul>
+            <li v-for="item in items">
+                {{ item.message }}
+            </li>
+        </ul>
+    </div>
+
+    <div class="box mc" id="app-2">
+        <h5>#基本用法</h5>
+        <ul>
+            <!-- item 为子项 index 为对应的索引 -->
+            <li v-for="(item, index) in items">
+               {{ parentMessage }} - {{ index }} - {{ item.message }}
+            </li>
+        </ul>
+    </div>
+
+    <div class="box mc" id="app-3">
+        <h5>对象迭代 v-for</h5>
+        <ul>
+            <!-- item 为子项 index 为对应的索引 -->
+            <li v-for="value in object">
+               {{ value }}
+            </li>
+        </ul>
+    </div>
+
+    <div class="box mc" id="app-4">
+        <h5>对象迭代 v-for</h5>
+        <ul>
+            <!-- item 为子项   key 为键名 index 为对应的索引 -->
+            <li v-for="(value, key, index) in object">
+              {{ index }}. {{ key }}: {{ value }}
+            </li>
+        </ul>
+    </div>
+
+    <div class="box mc" id="app-5">
+        <h5>整数迭代 v-for</h5>
+        <ul>
+            <!-- item 为子项 index 为对应的索引 -->
+            <li v-for="n in 10">
+                {{ n }}
+            </li>
+        </ul>
+    </div>
+
+    <div class="box mc" id="todo-list-example">
+        <input 
+            v-model="newTodoText" 
+            v-on:keyup.enter="addNewTodo"
+            placeholder="Add a todo"
+        >
+        <ul>
+            <li 
+                is="todo-item" 
+                v-for="(todo, index) in todos" 
+                v-bind:title="todo"
+                v-on:remove="todos.splice(index, 1)"
+            ></li>    
+        </ul>
+    </div>
+    
+
+<script>
+    
+    window.onload = function() {
+        var app = new Vue({
+            el: '#app-1',
+            data: {
+               items: [
+                        { message: 'Hello' },
+                        { message: 'Vue.js' },
+                        { message: 'I\'m studying' }
+               ]
+            }
+        });
+
+        var app2 = new Vue({
+            el: '#app-2',
+            data: {
+                parentMessage: 'Javascript',
+                items: [
+                        { message: 'Hello' },
+                        { message: 'Vue.js' },
+                        { message: 'I\'m studying' }
+                ]
+            }
+        });
+
+        var app3 = new Vue({
+            el: '#app-3',
+            data: {
+                object: {
+                    Name: 'Fan',
+                    Age: 21,
+                    Gender: 'male'
+                }
+            }
+        });
+
+        var app3 = new Vue({
+            el: '#app-4',
+            data: {
+                object: {
+                    Name: 'Fan',
+                    Age: 21,
+                    Gender: 'male'
+                }
+            }
+        });
+
+        var app3 = new Vue({
+            el: '#app-5'
+        });
+
+        Vue.component('todo-item', {
+            template: '\
+                <li>\
+                    {{ title }}\
+                    <button v-on:click="$emit(\'remove\')">X</button>\
+                </li>\
+            ',
+            props: ['title']
+        });
+
+        var example = new Vue({
+            el: '#todo-list-example',
+            data: {
+                todos: [
+                    'qqqq',
+                    'ddddd',
+                    'eeeeee' 
+                ],
+                newTodoText: ''
+            },
+            methods: {
+                addNewTodo: function() {
+                    this.todos.push(this.newTodoText);
+                    this.newTodoText = '';
+                }
+            }
+        });
+
+
+    };
+
+</script>
+
+</body>
+</html>
