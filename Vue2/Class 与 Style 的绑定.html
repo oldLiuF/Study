@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-size: 15px;
+        }
+        
+        /*DADADA*/
+        .box {
+            border: 1px solid #DADADA;
+            border-radius: 2px;
+            padding: 1.5em;
+            width: 40em;
+
+            line-height: 0.8em;
+        
+            background-color: #F8F8F8;
+        }
+
+        .mc {
+            margin: 4em auto;
+        }
+
+        .active {
+            border: 1px solid black;
+            border-radius: 50%;
+            padding: 3em;
+            background-color: yellow;
+        }
+        
+    </style>
+    <script type="text/javascript" src="scripts/vue.js"></script>
+</head>
+<body>
+        
+    <div class="box mc" id="app-1">
+        <div v-bind:class="{ active: isActive}">v-bind:class="{ active: {{ isActive }} }"</div>
+    </div>
+
+<script>
+    
+    window.onload = function() {
+        var app = new Vue({
+            el: '#app-1',
+            data: {
+                isActive: false
+            }
+        });
+
+    };
+
+</script>
+
+</body>
+</html>
