@@ -1,0 +1,70 @@
+<!DOCTYPE>
+<html>
+    <head>
+     <title></title>
+     <meta charset="UTF-8">
+     
+    </head>
+    <body>
+        <script>
+			
+			window.onload = function() {
+				
+				// 类 
+				function Person(firstName) {
+					// 初始化创建构造器
+					
+					// 属性
+					this.firstName = firstName;
+				}
+				
+				// 方法
+				Person.prototype.sayHello = function() {
+					console.log('Hello, I\'m ' + this.firstName);
+				}
+				
+				Person.prototype.walk = function() {
+					console.log('I am walking');
+				}
+				
+				function Student(firstName, subject) {
+				
+					Person.call(this, firstName);
+					
+					this.subject = subject;
+				} 
+				
+				// 使 Student.prototype._proto = Person.prototype   Student.prototype.constructor 被 覆盖  Student.prototype 没有构造函数
+				Student.prototype = Object.create(Person.prototype);
+				
+				// Student.prototype = Person.prototype
+				// Student.prototype = Person.prototype;
+				
+				// 构造函数 指向 Student    重新把构造函数指向 Student
+				Student.prototype.constructor = Student;
+				
+				Student.prototype.sayGoodbye = function() {
+					console.log(this.firstName + ' say goodbay!');
+				}
+				
+				var student1 = new Student('fan.liu', 'IT');
+				
+				student1.sayHello();
+				student1.walk();
+				student1.sayGoodbye();
+				
+				console.log(student1 instanceof Student); // true
+				console.log(student1 instanceof Person);  // true
+				
+				
+				var foo = function() {};
+				
+				console.log('foo is a Function: ' + (foo instanceof Function));
+				console.log('foo.prototype is a Object: ' + (foo.prototype instanceof Object));
+				
+				
+			}
+			
+        </script>
+    </body>
+</html>

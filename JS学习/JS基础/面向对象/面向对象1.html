@@ -1,0 +1,57 @@
+<!DOCTYPE>
+<html>
+    <head>
+     <title></title>
+     <meta charset="UTF-8">
+     
+    </head>
+    <body>
+        <script>
+			
+			window.onload = function() {
+			
+			
+				/*function Person() {
+					alert('Person instantiated');
+				}
+				
+				var person1 = new Person();
+				var person2 = new Person();*/ 
+				
+				// 类 
+				function Person(firstName) {
+					// 初始化创建构造器
+					
+					// 属性
+					this.firstName = firstName;
+				}
+				
+				// 方法
+				Person.prototype.sayHello = function() {
+					debugger;
+					console.log('Hello, I\'m ' + this.firstName);
+				}
+				
+				// 对象  (类的实例)
+				var person1 = new Person('fan.liu');
+				var person2 = new Person('sha.chen');
+				
+				var helloFunction = person1.sayHello;
+				
+				console.log(person1.sayHello === helloFunction);
+				console.log(Person.prototype.sayHello === helloFunction);
+				
+				person1.sayHello();  // tihs.firstName = 'fan.liu'	  this 指向 person1
+				person2.sayHello();  // this.firstName = 'sha.chen'   this 指向 person2
+				helloFunction();	 // this.firstName = undefined    this 指向 window
+				
+				// call 改变了 this 指向
+				helloFunction.call(person1); // tihs.firstName = 'fan.liu'
+				helloFunction.call(person2); // this.firstName = 'sha.chen'
+				
+				
+			}
+			
+        </script>
+    </body>
+</html>
