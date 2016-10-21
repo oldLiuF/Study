@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-size: 15px;
+        }
+        
+        /*DADADA*/
+        .box {
+            border: 1px solid #DADADA;
+            border-radius: 2px;
+            padding: 1.5em;
+            width: 40em;
+
+            line-height: 0.8em;
+        
+            background-color: #F8F8F8;
+        }
+
+        .mc {
+            margin: 4em auto;
+        }
+        
+    </style>
+    <script type="text/javascript" src="scripts/vue.js"></script>
+</head>
+<body>
+        
+    <div class="box mc" id="app-1">
+        <h5>#监听事件</h5>
+        <button v-on:click="counter += 1">增加 1</button>
+        <p>{{ counter }}</p>
+    </div>
+
+    <div class="box mc" id="app-2">
+        <h5>#方法事件处理器</h5>
+        <!-- 'greet' 是在下面定义的方法名 -->
+        <button v-on:click="greet">Greet</button>
+    </div>
+
+    <div class="box mc" id="app-3">
+        <h5>对象迭代 v-for</h5>
+       
+    </div>
+
+    <div class="box mc" id="app-4">
+        <h5>对象迭代 v-for</h5>
+       
+    </div>
+
+    <div class="box mc" id="app-5">
+        <h5>整数迭代 v-for</h5>
+       
+    </div>
+
+    <div class="box mc" id="app-6">
+        <h5>显示过滤/排序结果 v-for</h5>
+       
+    </div>
+
+
+<script>
+    
+    window.onload = function() {
+        var app = new Vue({
+            el: '#app-1',
+            data: {
+                counter: 0
+            }
+        });
+
+        var app2 = new Vue({
+            el: '#app-2',
+            data: {
+                name: 'Vue.js'
+            },
+            methods: {
+                greet: function(event) {
+                    // 'this' 在方法里指当前 Vue 实例
+                    alert('Hello ' + this.name + '!');
+                    // 'event' 是原生 DOM 事件
+                    alert(event.target.tagName);
+                    console.log(event);
+                }
+            }
+        });
+
+        var app3 = new Vue({
+            el: '#app-3',
+            data: {
+
+            }
+        });
+
+        var app4 = new Vue({
+            el: '#app-4',
+            data: {
+
+            }
+        });
+
+        var app5 = new Vue({
+            el: '#app-5'
+        });
+
+        var app6 = new Vue({
+            el: '#app-6',
+            data: {
+                
+            }
+        });
+    };
+
+</script>
+
+</body>
+</html>
