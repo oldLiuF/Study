@@ -2,8 +2,43 @@
 	border: 1px solid black;
 	border-radius: 4px;
 	margin: 200px auto 0;
-	padding: 0 10px 15px;
-	width: 680px;
+	padding: 0 15px 15px;
+	width: 600px;
 	
 	background-color: yellow;
+}
+
+.slider {
+	width: 600px;
+	height: 400px;
+
+    position: relative;
+
+	background-color: #d3d3d3;
+}
+
+.slider-main {
+	width: 600px;
+	height: 300px;
+		
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	background-color: white;
+}
+
+.slider-extra {
+    width: 600px;
+    height: 400px;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    z-index: 999;
+}
+
+.slider-nav {
+    
 }

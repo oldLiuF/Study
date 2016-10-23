@@ -1,109 +1,115 @@
 <!DOCTYPE html>
 
 <html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title></title>
-		<style type='text/css'>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <style type='text/css'>
 
 
 
-			.container {
-				position: relative;
+            .container {
+                position: relative;
 
-				border: 1px solid black;
-				border-radius: 4px;
-				padding: 10px;
-				width: 200px;
-				height: 200px;
-			}
+                border: 1px solid black;
+                border-radius: 4px;
+                padding: 10px;
+                width: 200px;
+                height: 200px;
+            }
 
-			
+            
 
-			.box {
-				position: absolute;
-				
-				/*border: 10px solid gray;*/
-				width: 40px;
-				height: 40px;
-			
-				background-color: red;
+            .box {
+                position: absolute;
+                
+                /*border: 10px solid gray;*/
+                width: 40px;
+                height: 40px;
+            
+                background-color: red;
 
-				font-size: 15px;
-				color: white;
-				text-align: center;
-				line-height: 40px;
-			}
-			
-		</style>
-	</head>
-	<body>
-		<input type="button" value="click" id="btn1">
-		<div id="container" class="container"></div>
-		<script type='text/javascript'>
-			window.onload = function() {
-				
-				var oContainer = document.getElementById('container'),
-					oBtn = document.getElementById('btn1'),
-					aDiv = oContainer.getElementsByTagName('div'),
-					i,
-					j = 0,
-					len = 5,
-					str = '';
-				for (i = 0; i < len; i++) {
-					str += '<div class="box">' + i + '</div>';
-				}
+                font-size: 15px;
+                color: white;
+                text-align: center;
+                line-height: 40px;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <input type="button" value="click" id="btn1">
+        <div id="container" class="container"></div>
+        <script type='text/javascript'>
+            window.onload = function() {
+                
+                var oContainer = document.getElementById('container'),
+                    oBtn = document.getElementById('btn1'),
+                    aDiv = oContainer.getElementsByTagName('div'),
+                    i,
+                    j = 0,
+                    len = 5,
+                    str = '';
+                for (i = 0; i < len; i++) {
+                    str += '<div class="box">' + i + '</div>';
+                }
 
-				 // oContainer.innerHTML = str;		
-				 // 
-				
-				oBtn.onclick = function() {
-					oContainer.innerHTML = str;
-					j++;
+                 // oContainer.innerHTML = str;     
+                 // 
+                
+                oBtn.onclick = function() {
+                    oContainer.innerHTML = str;
+                    j++;
 
-					switch(j) {
-						case 1:
-							for (i = 0; i < len; i++) {
-								aDiv[i].style.left = (i * 40) + 'px';
-								aDiv[i].style.top = (i > len/2 ? len - 1 - i : i) * 40 + 'px';
-							}
-							break;
-						case 2:
-							for (i = 0; i < len; i++) {
-								aDiv[i].style.left = (i > len/2 ? len - 1 - i : i) * 40 + 'px';
-								aDiv[i].style.top = (i * 40) + 'px';
-							}
-							break;
-						case 3:
-							for (i = 0; i < len; i++) {
-								aDiv[i].style.left = (i * 40) + 'px';
-								aDiv[i].style.top = (i < len/2 ? len - 1 - i : i) * 40 + 'px';
-							}
-							break;
-						case 4:
-							for (i = 0; i < len; i++) {
-								aDiv[i].style.left = (i < len/2 ? len - 1 - i : i) * 40 + 'px';
-								aDiv[i].style.top = (i * 40) + 'px';
-							}
-							// j = 0;
-							break;
-						case 5:
-							// 2 1 0 1 2
-
-							for (i = len - 1; i >= 0; i--) {
-								aDiv[i].style.left = (i > len/2 ? len - 1 - i : i) * 40 + 'px';
-								aDiv[i].style.top = (  Math.floor(i / 2) === 0 ? Math.floor(len - i) : Math.floor(i / 2) * 40) + 'px';
-							}
-							j = 0;
-							break;
-					}
-					/*for (i = 0; i < len; i++) {
-						aDiv[i].style.left = (i * 40) + 'px';
-						aDiv[i].style.top = (i > len/2 ? len - 1 - i : i) * 40 + 'px';
-					}*/
-				}
-			
-			}
-		</script>
-	</body>
+                  switch(j) {
+                        case 1:
+                            for (i = 0; i < len; i++) {
+                                aDiv[i].style.left = (i * 40) + 'px';
+                                aDiv[i].style.top = (i > len/2 ? len - 1 - i : i) * 40 + 'px';
+                            }
+                            break;
+                        case 2:
+                            for (i = 0; i < len; i++) {
+                                aDiv[i].style.left = (i > len/2 ? len - 1 - i : i) * 40 + 'px';
+                                aDiv[i].style.top = (i * 40) + 'px';
+                            }
+                            break;
+                        case 3:
+                            for (i = 0; i < len; i++) {
+                                aDiv[i].style.left = (i * 40) + 'px';
+                                aDiv[i].style.top = (i < len/2 ? len - 1 - i : i) * 40 + 'px';
+                            }
+                            break;
+                        case 4:
+                            for (i = 0; i < len; i++) {
+                                aDiv[i].style.left = (i < len/2 ? len - 1 - i : i) * 40 + 'px';
+                                aDiv[i].style.top = (i * 40) + 'px';
+                            }
+                            break;
+                        case 5:
+                            for (i = 0; i < len; i++) {
+                                aDiv[i].style.left = (i * 40) + 'px';
+                                aDiv[i].style.top = (Math.abs(Math.floor((len - 1) / 2 - i))) * 40 + 'px';
+                            }
+                        break;
+                        case 6:
+                            for (i = 0; i < len; i++) {
+                                aDiv[i].style.top = (i * 40) + 'px';
+                                aDiv[i].style.left = (Math.abs(Math.floor((len - 1) / 2 - i))) * 40 + 'px';
+                            }
+                        break;
+                        case 7:
+                            for (i = 0; i < len; i++) {
+                                aDiv[i].style.left = (i * 40) + 'px';
+                                aDiv[i].style.top = (Math.abs(Math.floor((len - 1) / 2 - i))) * 40 + 'px';
+                            }
+                            j = 0;
+                        break;
+                    }
+                    
+                }
+            
+            }
+        </script>
+    </body>
 </html>

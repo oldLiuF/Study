@@ -1,0 +1,191 @@
+﻿<!DOCTYPE html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<style>
+		body, ul, li, em,h4 {
+			margin: 0;
+			padding: 0;
+		}
+		
+		li {
+			list-style: none;
+		}
+
+		.main {
+			margin: 200px auto 0;
+			border: 1px solid black;
+			width: 200px;
+			background-color: #EBF2E9;
+			cursor: pointer;
+		}
+
+		.title {
+			/*background-color: #EBF2E9;*/
+			height: 30px;
+			line-height: 30px;
+			text-indent: 1.5em;
+			position: relative;
+		}
+
+		.title:before {
+			display: block;
+
+			width: 10px;
+			height: 10px;
+
+			position: absolute;
+			top: 10px;
+			left: 5px;
+
+			content: "";
+			background-image: url("images/ico1.gif");
+			background-repeat: no-repeat;
+		}
+		
+		.container div.hover {
+			background-color: #EEF6F5;
+		}
+
+		.expand:before {
+			background-image: url("images/ico2.gif");
+		}
+
+		.content ul li {
+			padding: 4px 5px;
+		}
+
+		.content ul li.active {
+			background-color: #FDEBA8;
+		}
+	</style>
+</head>
+<body>
+	<div class="main" id="main">
+		 <ul>
+		 	<li>
+		 		<div class="container">
+		 			<div class="title expand"><h4>妹纸</h1></div>
+		 			<div class="content">
+		 				<ul>
+		 					<li class="active">陈莎</li>
+		 					<li>文杨</li>
+		 					<li>余瑾</li>
+		 					<li>李顺</li>
+		 					<li>周思云</li>
+		 					<li>冯莎</li>
+		 					<li>刘瑞琪</li>
+		 					<li>宋沙沙</li>
+		 				</ul>
+		 			</div>
+		 		</div>
+		 	</li>
+		 	<li>
+		 		<div class="container">
+		 			<div class="title expand"><h4>329</h1></div>
+		 			<div class="content">
+		 				<ul>
+		 					<li>陆世豪</li>
+		 					<li>梁景发</li>
+		 					<li>庄世岚</li>
+		 					<li>石志远</li>
+		 					<li>邹欢</li>
+		 					<li>刘凡</li>
+		 				</ul>
+		 			</div>
+		 		</div>
+		 	</li>
+		 	<li>
+		 		<div class="container">
+		 			<div class="title expand"><h4>隔壁老王</h1></div>
+		 			<div class="content">
+		 				<ul>
+		 					<li>王征葳</li>
+		 					<li>将白清</li>
+		 					<li>吕文涛</li>
+		 					<li>朱焱</li>
+		 					<li>万涛</li>
+		 					<li>张官</li>
+		 				</ul>
+		 			</div>
+		 		</div>
+		 	</li>
+		 	<li>
+		 		<div class="container">
+		 			<div class="title expand"><h4>隔壁老王</h1></div>
+		 			<div class="content">
+		 				<ul>
+		 					<li>付忠鑫</li>
+		 					<li>韩康林</li>
+		 					<li>熊俊豪</li>
+		 					<li>刘旭</li>
+		 					<li>张建</li>
+		 					<li>程勇</li>
+		 				</ul>
+		 			</div>
+		 		</div>
+		 	</li>
+		 	<li>
+		 		<div class="container">
+		 			<div class="title expand"><h4>隔壁老王</h1></div>
+		 			<div class="content">
+		 				<ul>
+		 					<li>张佳豪</li>
+		 					<li>程易蒙</li>
+		 					<li>王有权</li>
+		 					<li>罗强</li>
+		 					<li>张欢</li>
+		 					<li>程勇</li>
+		 				</ul>
+		 			</div>
+		 		</div>
+		 	</li>
+		 	<li>
+		 		<div class="container">
+		 			<div class="title expand"><h4>隔壁老王</h1></div>
+		 			<div class="content">
+		 				<ul>
+		 					<li>李旭东</li>
+		 					<li>鲁飞</li>
+		 				</ul>
+		 			</div>
+		 		</div>
+		 	</li>
+		 </ul>
+	</div>
+	<script>
+		window.onload = function() {
+
+			var oMain = document.getElementById('main'),
+				arrElement;
+
+			arrElement = getElementsByclassName('container', 'div', oMain);
+
+			
+
+			/**
+			 * [getElementsByclassName description]
+			 * @param  {[type]} className [description]
+			 * @param  {[type]} elm       [description]
+			 * @param  {[type]} target    [description]
+			 * @return {[type]}           [description]
+			 */
+			function getElementsByclassName(className, elm, target) {
+				var aElm = target.getElementsByTagName(elm),
+				len = aElm.length,
+				arrElement = [],
+				i;
+				for (i = 0; i < len; i++) {
+
+					if ((aElm[i].className).indexOf(className) >= 0) {
+						arrElement.push(aElm[i]);
+					} 
+
+				}
+
+				return arrElement;
+			}
+		}
+	</script>
+</body>
+</html>
