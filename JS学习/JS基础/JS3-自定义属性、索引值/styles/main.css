@@ -50,11 +50,17 @@
     left: 50%;
     margin-left: -33px;
     font-size: 0;
+
+     
 }
 
 .slider-nav li {
     display: inline-block;
     margin: 2px;
+}
+
+.slider-nav li.selected a{
+    background-color: red;
 }
 
 .slider-nav li a {
