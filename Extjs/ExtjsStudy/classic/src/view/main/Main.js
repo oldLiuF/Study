@@ -12,7 +12,7 @@ Ext.define('ExtjsStudy.view.main.Main', {
     requires: [
         'Ext.plugin.Viewport',
         'Ext.window.MessageBox',
-
+        'Ext.menu.Menu',
         'ExtjsStudy.view.main.MainController',
         'ExtjsStudy.view.main.MainModel',
         'ExtjsStudy.view.main.List',
@@ -105,5 +105,28 @@ Ext.define('ExtjsStudy.view.main.Main', {
         xtype: 'gridpaneltest'
     }, {
         xtype: 'fileuploadcomponent'
+    }, {
+        title: 'Menu',
+        items: [
+            {
+                xtype: 'menu',
+                title: 'Menu',
+                items: [{
+                    text: 'regular item 1',
+                    width: 100,
+                    items: [
+                        {
+                            text: 'ddddd'
+                        }
+                    ]
+                },{
+                    text: 'regular item 2',
+                    width: 100
+                },{
+                    text: 'regular item 3',
+                    width: 100
+                }]
+    }
+        ]
     }]
 });

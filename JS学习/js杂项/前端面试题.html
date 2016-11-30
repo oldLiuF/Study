@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+</head>
+<body>
+
+
+<script>
+    
+window.onload = function() {
+
+
+     function Foo() {
+        getName = function () { alert (1); };
+        return this;
+    }
+    Foo.getName = function () { alert (2);};
+    Foo.prototype.getName = function () { alert (3);};
+    var getName = function () { alert (4);};
+    function getName() { alert (5);}
+
+    console.log(x);
+
+    var x = 4;
+
+//请写出以下输出结果：
+    // Foo.getName();  // Foo.getName() is not function
+    // getName();      // alert(4);
+    Foo().getName();// alert(1);  在window.load = function() {} 里 为 is not a function
+    // getName();
+    // new Foo.getName();
+    // new Foo().getName();
+    // new new Foo().getName();
+
+}
+
+   
+
+</script>
+
+</body>
+</html>
