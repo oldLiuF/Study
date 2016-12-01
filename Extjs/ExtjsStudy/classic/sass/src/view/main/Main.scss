@@ -81,3 +81,14 @@
     top: 30px;
     right: -24px;
 }
+
+.bz-btn-3 {
+    background-image: url("03.png") !important;
+    width: 100px !important;
+    height: 30px !important;
+    background-repeat: no-repeat !important;
+}
+
+/*@include extjs-button-ui {
+     $ui: 'baozun-btn'
+}*/

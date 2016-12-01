@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style>
+		.box{
+			border: 1px solid black;
+			height:100px;
+			width: 200px;
+			overflow: hidden;
+			background-color:linear-gradient(top,red,yellow);
+		}
+
+		.yellow {
+			background-color: yellow;
+		}
+
+		.f30 {
+			font-size: 30px;
+		}
+	</style>
+</head>
+<body>
+	<div class="box add class name">
+		hello world!
+	</div>
+	<script type="text/javascript">
+
+		
+
+      	window.onload = function() {
+
+			HTMLElement.prototype.removeClass = function(className) {
+				debugger;
+    	    }
+
+	        HTMLElement.prototype.addClass = function(className) {
+				debugger;
+	        }
+
+      		var oDiv = document.getElementsByTagName('div')[0];
+			debugger;
+      		oDiv.classList()
+      		
+
+      	};
+
+	</script>
+</body>
+</html>
