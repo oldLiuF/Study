@@ -31,14 +31,26 @@
 			</div>
 		</div>
 	</div>
-
+	
 <script>
     
     window.onload = function() {
-        
+		var data = [
+			{ src: '', text: '' },
+			{ src: '', text: '' },
+			{ src: '', text: '' }
+		];
+        sliderInit();
     };
 
-    function sliderInit() {
+	function Slider(opts) {
+		var 
+		this.initVal(opts.data);
+
+	}
+
+    function sliderInit(data) {
+		var oSlider = document.querySelector('.slider');
 
 	}
 
