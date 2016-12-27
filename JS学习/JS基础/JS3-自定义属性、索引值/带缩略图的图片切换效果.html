@@ -1,61 +1,194 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title></title>
     <link rel="stylesheet" href="styles/base.css">
     <link rel="stylesheet" href="styles/main.css">
 </head>
+
 <body>
-        
-	<div class="container">
-		<div class="container-header">
-			带缩略图的图片轮播
-		</div>
-		<div class="slider">
-			<!-- 主体 -->
-			<ul class="slider-main">
-			     	
-			</ul>
-			<!-- 导航条 -->
-			<div class="slider-extra">
-				<ul class="slider-nav">
-                    <li class="selected"><a href="javascript:void(0)">1</a></li>
+    <div class="container">
+        <div class="container-header">
+            带缩略图的图片轮播
+        </div>
+        <div class="slider">
+            <!-- 主体 -->
+            <ul class="slider-main">
+            </ul>
+            <!-- 导航条 -->
+            <div class="slider-extra">
+                <ul class="slider-nav">
+                    <!--<li class="selected"><a href="javascript:void(0)">1</a></li>
                     <li><a href="javascript:void(0)">2</a></li>
-                    <li><a href="javascript:void(0)">3</a></li>            
+                    <li><a href="javascript:void(0)">3</a></li>            -->
                 </ul>
-				<div class="slider-page">
-					<a href="javascript:;" class="slider-prev"></a>
+                <div class="slider-page">
+                    <a href="javascript:;" class="slider-prev"></a>
                     <a href="javascript:;" class="slider-next"></a>
-				</div>
-			</div>
-		</div>
-	</div>
-	
-<script>
-    
-    window.onload = function() {
-		var data = [
-			{ src: '', text: '' },
-			{ src: '', text: '' },
-			{ src: '', text: '' }
-		];
-        sliderInit();
-    };
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        window.onload = function () {
+            var data = [{
+                src: 'images/1.png',
+                text: '1.png'
+            }, {
+                src: 'images/2.png',
+                text: '2.png'
+            }, {
+                src: 'images/3.png',
+                text: '3.png'
+            }];
+            sliderInit(data);
+        };
 
-	function Slider(opts) {
-		var 
-		this.initVal(opts.data);
+        function Slider(opts) {
+            this.initVal(opts.data);
+        }
 
-	}
+        function sliderInit(data) {
+            // 滑块主体
+            var oSlider = document.querySelector('.slider'),
+                // 内容主体
+                oMain = oSlider.querySelector('.slider-main'),
+                // 插件
+                oExtra = oSlider.querySelector('.slider-extra'),
+                // 导航
+                oNav = oExtra.querySelector('.slider-nav'),
+                // 左右切换
+                oPage = oExtra.querySelector('.slider-page'),
+                oPrev = oPage.querySelector('.slider-prev'),
+                oNext = oPage.querySelector('.slider-next'),
+                // 创建元素数量
+                len = data.length,
 
-    function sliderInit(data) {
-		var oSlider = document.querySelector('.slider');
+                oItem, oA, oImg, oNavItem, oNavA;
 
-	}
+            // 初始化
+
+            // 初始化长度
+            oMain.style.width = len * 600 + 'px';
+
+            oMain.index = 0;
+            oMain.itemLen = len;
+
+            // 根据数据创建
+            for (i = 0; i < len; i++) {
+                // 主内容
+                oItem = document.createElement('li');
+                oA = document.createElement('a');
+                oImg = document.createElement('img');
+
+                // images
+                oImg.src = data[i].src;
+                oImg.alt = data[i].alt;
+
+                oA.appendChild(oImg);
+                oItem.appendChild(oA);
+                oMain.appendChild(oItem);
+
+                // nav 
+                oNavItem = document.createElement('li');
+                oNavA = document.createElement('a');
+
+                oNavA.href = 'javascript:void(0);';
+
+                oNavA.index = i;
+                oNavA.innerHTML = i + 1;
+                oNavA.addEventListener('click', changeItem);
+
+                oNavItem.appendChild(oNavA);
+                oNavItem.index = i;
+                oNav.appendChild(oNavItem);
 
 
-</script>
+            }
 
+            // nav 初始化
+            oNav.children[0].classList.add('selected');
+            oNav.prevNode = oNav.children[0];
+
+            //
+            oPrev.onclick = function () {
+                var oSlider = document.querySelector('.slider'),
+                    // 内容主体
+                    oMain = oSlider.querySelector('.slider-main'),
+
+                    index = oMain.index,
+                    itemLen = oMain.itemLen;
+
+                if (index === 0) {
+                    index = itemLen - 1;
+                } else {
+                    index--;
+                }
+                // oMain.index = index;
+
+                moveItem(index);
+            }
+
+            oNext.onclick = function () {
+                var oSlider = document.querySelector('.slider'),
+                    // 内容主体
+                    oMain = oSlider.querySelector('.slider-main'),
+
+                    index = oMain.index,
+                    itemLen = oMain.itemLen;
+
+                if (index === itemLen - 1) {
+                    index = 0;
+                } else {
+                    index++;
+                }
+                // oMain.index = index;
+
+                moveItem(index);
+            }
+
+            // 改变元素
+            function changeItem(e) {
+
+                // 移动节点
+                moveItem(this.index);
+
+            }
+
+            /**
+             * 移动子元素
+             *
+             */
+            function moveItem(index) {
+
+                var oSlider = document.querySelector('.slider'),
+                    // 内容主体
+                    oMain = oSlider.querySelector('.slider-main');
+                    oMain.index = index;
+
+                // 下方 nav
+                var oNav = document.querySelector('.slider-nav'),
+                    aLi = oNav.children,
+                    len = aLi.length,
+                    oPrevNode = oNav.prevNode || null;
+
+                // 移除上一个样式
+                oPrevNode && oPrevNode.classList.remove('selected');
+                
+                // 把上一次节点记录下来
+                oNav.prevNode = aLi[index];
+
+                //添加选中样式
+                aLi[index].classList.add('selected');
+
+                // 移动
+                oMain.style.left = -index * 600 + 'px';
+            }
+
+        }
+    </script>
 </body>
+
 </html>

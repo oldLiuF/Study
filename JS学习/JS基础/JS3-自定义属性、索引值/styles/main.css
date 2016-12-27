@@ -16,10 +16,11 @@
     position: relative;
 
 	background-color: #d3d3d3;
+    overflow: hidden;
 }
 
 .slider-main {
-	width: 600px;
+	/*width: 600px;*/
 	height: 300px;
 		
 	position: absolute;
@@ -27,6 +28,23 @@
 	left: 0;
 
 	background-color: white;
+}
+
+.slider-main li {
+    width: 600px;
+    height: 300px;
+    float: left;
+}
+
+.slider-main li a {
+    display: block;
+    width: 600px;
+    height: 300px;
+}
+
+.slider-main li img{
+    width: 600px;
+    height: 300px;
 }
 
 .slider-extra {
@@ -51,8 +69,6 @@
     left: 50%;
     margin-left: -33px;
     font-size: 0;
-
-     
 }
 
 .slider-nav li {
