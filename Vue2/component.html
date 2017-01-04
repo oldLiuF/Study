@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="styles/base.css" rel="stylesheet">
+        <script type="text/javascript" src="scripts/vue.js"></script>
+    </head>
+    <body>
+
+        <div id="example">
+            <my-component></my-component>
+        </div>
+
+        <script>
+            // 注册全局组件
+            Vue.component('my-component', {
+                // 组件模版
+                template: '<div>A custom component</div>'
+            });
+
+            // 创建根实例
+            new Vue({
+                el: '#example'
+            });
+        </script>
+        
+    </body>
+</html>
