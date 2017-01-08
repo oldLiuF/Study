@@ -1,8 +1,16 @@
-body {
+body, h4 {
     margin: 0;
     padding: 0;
 }
 
 body {
     font-size: 15px;
+}
+
+.mc {
+    margin: 0 auto;
+}
+
+.mb10 {
+    margin-bottom: 10px;
 }

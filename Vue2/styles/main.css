@@ -1,0 +1,8 @@
+.box {
+    border: 1px solid #DADADA;
+    border-radius: 2px;
+    padding: 1.5em;
+    width: 40em;
+    line-height: 0.8em;
+    background-color: #F8F8F8;
+}

@@ -5,25 +5,124 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="styles/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="styles/main.css">
         <script type="text/javascript" src="scripts/vue.js"></script>
     </head>
     <body>
 
-        <div id="example">
+        <div class="box mc" id="app1">
+            <h4 class="mb10">全局注册组件</h4>
             <my-component></my-component>
         </div>
+
+        <div class="box mc" id="app2">
+            <h4 class="mb10">局部注册组件</h4>
+            <my-component></my-component>
+        </div>
+
+        <div class="box mc" id="app3">
+            <h4 class="mb10">component data, 公用一个data</h4>
+            <simple-counter></simple-counter>
+            <simple-counter></simple-counter>
+            <simple-counter></simple-counter>
+            <simple-counter></simple-counter>
+        </div>
+
+        <div class="box mc" id="app4">
+            <h4 class="mb10">component data, 独立 data</h4>
+            <simple-counter></simple-counter>
+            <simple-counter></simple-counter>
+            <simple-counter></simple-counter>
+            <simple-counter></simple-counter>
+        </div>
+
+        <div class="box mc" id="app5">
+            <h4 class="mb10">动态Prop</h4>
+            <input type="text" name="" v-model="message" />
+            <!-- 动态绑定 props 的值到父组件的数据中去 -->
+            <!-- v-bind:message 为 props 的值, 等号右边为 父组件的数据-->
+            <child v-bind:message="message"></child>
+        </div>
+
 
         <script>
             // 注册全局组件
             Vue.component('my-component', {
                 // 组件模版
-                template: '<div>A custom component</div>'
+                template: '<div>A global component</div>'
             });
 
             // 创建根实例
             new Vue({
-                el: '#example'
+                el: '#app1'
             });
+            
+            // 局部组件
+            var child = {
+                template: '<div>A local component</div>'
+            }
+            
+            // 只可在父组件的作用域下使用
+            new Vue({
+                el: '#app2',
+                components: {
+                    'my-component': child
+                }
+            });
+
+
+            // data 必须作为函数 公用一个 data
+            var data = { counter: 0 };
+
+            Vue.component('simple-counter', {
+                template: '<button v-on:click="counter += 1">{{ counter }}</button>',
+                data: function() {
+                    return data;
+                }
+            });
+
+            new Vue({
+                el: '#app3'
+            });
+
+
+            // 独立 data
+          
+            Vue.component('simple-counter', {
+                template: '<button v-on:click="counter += 1">{{ counter }}</button>',
+                data: function() {
+                    return {
+                        counter: 0
+                    };
+                }
+            });
+
+            new Vue({
+                el: '#app4'
+            });
+
+
+            // Prop
+
+            Vue.component('child', {
+                // 申明 props 
+                props: ['message'],
+                // 就像 data 一样, props 也可以用在模版中
+                // 同样也可以在 vm 实例中像 `this.message` 这样使用
+                // prop 是父组件用来传递数据的一个自定义属性。子组件需要显式地用 props 选项声明 “prop”：
+                template: '<span>{{ message }}</span>'
+            });
+
+            new Vue({
+                el: '#app5',
+                // template: '',
+                data: function() {
+                    return {
+                        message: 'Hello Vue.js!'
+                    }
+                }
+            });
+
         </script>
         
     </body>
