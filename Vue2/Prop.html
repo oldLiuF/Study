@@ -1,106 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title></title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-          <link href="styles/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="styles/main.css">
-        <script type="text/javascript" src="scripts/vue.js"></script>
-    </head>
-    <body>
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="styles/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+    <script type="text/javascript" src="scripts/vue.js"></script>
+</head>
+
+<body>
     <div class="box mc" id="app5">
-            <h4 class="mb10">动态Prop</h4>
-            <input type="text" name="" v-model="message" />
-            <!-- 动态绑定 props 的值到父组件的数据中去 -->
-            <!-- v-bind:message 为 props 的值, 等号右边为 父组件的数据-->
-            <child v-bind:message="message"></child>
-        </div>
+        <h4 class="mb10">动态Prop</h4>
+        <input type="text" name="" v-model="message" />
+        <!-- 动态绑定 props 的值到父组件的数据中去 -->
+        <!-- v-bind:message 为 props 的值, 等号右边为 父组件的数据-->
+        <child v-bind:message="message"></child>
+    </div>
+    <div class="box mc" id="app6">
+        <h4 class="mb10">Prop 验证</h4>
+        <!--<input type="text" name="" v-model="message" />-->
+        <!-- !!!重要  HTML 特性不区分大小写。当使用非字符串模版时，prop的名字形式会从 camelCase 转为 kebab-case（短横线隔开）-->
+        <!-- <example :propC="propC"> 这样不会显示在页面上</example>-->
+        <example :prop-c="propC" :prop-a="1">
+        </example>
+    </div>
+    <script>
+        // Prop
 
-        <div class="box mc" id="app6">
-            <h4 class="mb10">Prop 验证</h4>
-            <!--<input type="text" name="" v-model="message" />-->
-            <!-- !!!重要  HTML 特性不区分大小写。当使用非字符串模版时，prop的名字形式会从 camelCase 转为 kebab-case（短横线隔开）-->
-            <!-- <example :propC="propC"> 这样不会显示在页面上</example>-->
-            <example :prop-C="propC">
-            </example>
-        </div>
+        Vue.component('child', {
+            // 申明 props 
+            props: ['message'],
+            // 就像 data 一样, props 也可以用在模版中
+            // 同样也可以在 vm 实例中像 `this.message` 这样使用
+            // prop 是父组件用来传递数据的一个自定义属性。子组件需要显式地用 props 选项声明 “prop”：
+            template: '<span>{{ message }}</span>'
+        });
 
-        <script>
-       
-            // Prop
+        new Vue({
+            el: '#app5',
+            // template: '',
+            data: function () {
+                return {
+                    message: 'Hello Vue.js!'
+                }
+            }
+        });
 
-            Vue.component('child', {
-                // 申明 props 
-                props: ['message'],
-                // 就像 data 一样, props 也可以用在模版中
-                // 同样也可以在 vm 实例中像 `this.message` 这样使用
-                // prop 是父组件用来传递数据的一个自定义属性。子组件需要显式地用 props 选项声明 “prop”：
-                template: '<span>{{ message }}</span>'
-            });
-
-            new Vue({
-                el: '#app5',
-                // template: '',
-                data: function() {
-                    return {
-                        message: 'Hello Vue.js!'
+        // Prop 验证
+        Vue.component('example', {
+            // HTML 特性不区分大小写。当使用非字符串模版时，prop的名字形式会从 camelCase 转为 kebab-case（短横线隔开）
+            props: {
+                // 基础类型检测 `null` 是任何类型都可以
+                propA: Number,
+                // 多类型检测
+                propB: [String, Number],
+                // 必传并且为字符串
+                propC: {
+                    type: String,
+                    required: true
+                },
+                // 数字, 有默认值
+                propD: {
+                    type: Number,
+                    default: 100
+                },
+                // 数组/对象的默认值应当由一个工厂函数返回
+                propE: {
+                    type: Object,
+                    default: function () {
+                        return {
+                            array: [],
+                            object: {}
+                        }
+                    }
+                },
+                // 自定义验证函数
+                propF: {
+                    validator: function (value) {
+                        return value > 20;
                     }
                 }
-            });
+                // `type` 也可以自定义构造器, 使用 `instanceof` 检测
+                // 当 prop 检测失败了, 如果使用开发版会抛出一条警告
+            },
+            template: '<span>{{ propC }}</span>'
+        });
 
-            // Prop 验证
-            Vue.component('example', {
-                // HTML 特性不区分大小写。当使用非字符串模版时，prop的名字形式会从 camelCase 转为 kebab-case（短横线隔开）
-                props: {
-                    // 基础类型检测 `null` 是任何类型都可以
-                    propA: Number,
-                    // 多类型检测
-                    propB: [String, Number],
-                    // 必传并且为字符串
-                    propC: {
-                        type: String,
-                        required: false
-                    },
-                    // 数字, 有默认值
-                    propD: {
-                        type: Number,
-                        default: 100
-                    },
-                    // 数组/对象的默认值应当由一个工厂函数返回
-                    propE: {
-                        type: Object,
-                        default: function() {
-                            return {
-                                array: [],
-                                object: {}
-                            }
-                        }
-                    },
-                    // 自定义验证函数
-                    propF: {
-                        validator: function(value) {
-                            return value > 20;
-                        } 
-                    }
-                    // `type` 也可以自定义构造器, 使用 `instanceof` 检测
-                    // 当 prop 检测失败了, 如果使用开发版会抛出一条警告
-                },
-                template: '<span>{{ propC }}</span>'
-            });
+        new Vue({
+            el: '#app6',
+            data: function () {
+                return {
+                    propA: '2222',
+                    propC: '1111'
+                }
+            },
+            components: ['example']
+        })
+    </script>
+</body>
 
-            new Vue({
-                el: '#app6',
-                data: function() {
-                    return {
-                        propA: '2222',
-                        propC: '1111'
-                    }
-                },
-                components: ['example']
-            })
-
-
-        </script>
-    </body>
 </html>

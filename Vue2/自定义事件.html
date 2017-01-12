@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="styles/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+    <script type="text/javascript" src="scripts/vue.js"></script>
+</head>
+
+<body>
+
+    <div class="box mc" id="app1">
+        <h4>使用 v-on 绑定自定义事件</h4>
+        <p>{{ total }}</p>
+        <button-counter v-on:increment="incrementTotal"></button-counter>
+        <!-- v-on($on)监听事件-->
+        <button-counter v-on:increment="incrementTotal"></button-counter>
+        <button-counter v-on:increment="incrementTotal"></button-counter>
+        <button-reduce v-on:reduce="reduceTotal"></button-reduce>        
+    </div>
+
+    <script>
+
+        function reduceTotal(ev) {
+            debugger;
+        }
+
+        Vue.component('button-reduce', {
+            template: '<button v-on:click="reduce">-</button>',
+            data: function() {
+                return {
+                    num: 0
+                };
+            },
+            methods: {
+                reduce: function(ev) {
+                    this.num--;
+                    this.$emit('reduce');
+                }
+            }
+        });
+
+        Vue.component('button-counter', {
+            template: '<button v-on:click="increment">{{ counter }}</button>',
+            data: function() {
+                return {
+                    counter: 0
+                };
+            },
+            methods: {
+                increment: function() {
+                    this.counter++;
+                    // 触发事件
+                    this.$emit('increment');
+                }
+            }
+        });
+
+        new Vue({
+            el: '#app1',
+            data: function() {
+                return {
+                    total: 0
+                };
+            },
+            methods: {
+                incrementTotal: function() {
+                    this.total++;
+                },
+                reduceTotal: function(ev) {
+                    this.total--;
+                }
+            }
+        })
+
+
+
+    </script>
+
+</body>
+
+</html>
