@@ -8,10 +8,10 @@
     <link href="styles/base.css" rel="stylesheet">
     <link rel="stylesheet" href="styles/main.css">
     <script type="text/javascript" src="scripts/vue.js"></script>
+    <script src="https://cdn.rawgit.com/chrisvfritz/5f0a639590d6e648933416f90ba7ae4e/raw/98739fb8ac6779cb2da11aaa9ab6032e52f3be00/currency-validator.js"></script>
 </head>
 
 <body>
-
     <div class="box mc" id="app1">
         <h4>使用 v-on 绑定自定义事件</h4>
         <p>{{ total }}</p>
@@ -19,24 +19,32 @@
         <!-- v-on($on)监听事件-->
         <button-counter v-on:increment="incrementTotal"></button-counter>
         <button-counter v-on:increment="incrementTotal"></button-counter>
-        <button-reduce v-on:reduce="reduceTotal"></button-reduce>        
+        <button-reduce v-on:reduce="reduceTotal"></button-reduce>
     </div>
-
+    <div class="box mc" id="app2">
+        <h4>简单表单输入组件</h4>
+        <easy-input v-model="price"></easy-input>
+    </div>
+    <div class="box mc" id="app3">
+        <h4>表单输入组件</h4>
+        <!--label="Price"-->
+        <!--label="Discount"-->
+        <currency-input v-model="price"></currency-input>
+        <currency-input v-model="discount"></currency-input>
+        <p>${{ total }}</p>
+    </div>
     <script>
 
-        function reduceTotal(ev) {
-            debugger;
-        }
-
         Vue.component('button-reduce', {
+            // template 模版只能有一个 root 节点, 这样不行 `<div></div><div></div>`, 这样就可以 `<div><div></div></div>`   
             template: '<button v-on:click="reduce">-</button>',
-            data: function() {
+            data: function () {
                 return {
                     num: 0
                 };
             },
             methods: {
-                reduce: function(ev) {
+                reduce: function (ev) {
                     this.num--;
                     this.$emit('reduce');
                 }
@@ -45,13 +53,13 @@
 
         Vue.component('button-counter', {
             template: '<button v-on:click="increment">{{ counter }}</button>',
-            data: function() {
+            data: function () {
                 return {
                     counter: 0
                 };
             },
             methods: {
-                increment: function() {
+                increment: function () {
                     this.counter++;
                     // 触发事件
                     this.$emit('increment');
@@ -61,25 +69,139 @@
 
         new Vue({
             el: '#app1',
-            data: function() {
+            data: function () {
                 return {
                     total: 0
                 };
             },
             methods: {
-                incrementTotal: function() {
+                incrementTotal: function () {
                     this.total++;
                 },
-                reduceTotal: function(ev) {
+                reduceTotal: function (ev) {
                     this.total--;
                 }
             }
-        })
+        });
 
 
+        // 使用自定义事件的表单输入组件
 
+        // 1.简单表单输入组件
+
+        Vue.component('easy-input', {
+            template: '\
+                <span>\
+                    $\
+                    <input\
+                        ref="input"\
+                        v-bind:value="value"\
+                        v-on:input="updateValue($event.target.value)"\
+                    >\
+                </span>\
+            ',
+            props: ['value'],
+            methods: {
+                updateValue: function (value) {
+                    console.log(JSON.stringify(value));
+                    var formattedValue = value
+                        // 删除两边空格
+                        .trim()
+                        // 保留俩位小数  提取的新字符串包括 beginSlice 但不包括 endSlice
+                        .slice(0, value.indexOf('.') + 3);
+                    // 如果值不统一, 则手动保持一致
+                    if (formattedValue !== value) {
+                        this.$refs.input.value = formattedValue;
+                    }
+                    // 通过 input 事件发出数值 这样才能响应获取到改变的值
+                    this.$emit('input', Number(formattedValue));
+                }
+            }
+        });
+
+        new Vue({
+            el: '#app2',
+            data: function () {
+                return {
+                    price: 0
+                };
+            }
+        });
+
+
+        Vue.component('currency-input', {
+            template: '\
+               <div>\
+                    <label v-if="label">{{ label }}</label>\
+                    $\
+                    <input\
+                        ref="input"\
+                        v-bind:value="value"\
+                        v-on:input="updateValue($event.target.value)"\
+                        v-on:focus="selectAll"\
+                        v-on:blur="formatValue"\
+                    >\
+               </div>\
+            ',
+            props: {
+                value: {
+                    type: Number,
+                    default: 0
+                },
+                label: {
+                    type: String,
+                    default: ''
+                }
+            },
+            // 生命周期钩子
+            mounted: function() {
+                this.formatValue();
+            },
+
+            methods: {
+                updateValue: function (value) {
+                    // value 新值 this.value 旧值,  this.$emit($event.target.value) 更新值
+                    var result = currencyValidator.parse(value, this.value);
+                    // 格式化后非数字类型不修改值
+                    if (result.warning) {
+                        this.$refs.input.value = result.value;
+                    }
+                    // debugger;
+                    this.$emit('input', result.value);
+                },
+                formatValue: function () {
+                    this.$refs.input.value = currencyValidator.format(this.value);
+                },
+                // 全选
+                selectAll: function (event) {
+                    // 兼容 Safari
+                    setTimeout(function () {
+                        event.target.select();
+                    }, 0);
+
+                }
+            }
+        });
+
+
+        new Vue({
+            el: '#app3',
+            data: function () {
+                return {
+                    price: 0,
+                    discount: 0
+                };
+            },
+            computed: {
+                total: function () {
+                    return (
+                        this.price * 100 +
+                        this.discount * 100
+                    );
+                }
+            }
+        });
     </script>
-
 </body>
 
 </html>

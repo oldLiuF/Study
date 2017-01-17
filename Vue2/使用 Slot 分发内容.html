@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="styles/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+    <script type="text/javascript" src="scripts/vue.js"></script>
+</head>
+
+<body>
+    <div class="box mc" id="app1">
+        <h4>编译作用域</h4>
+        <!-- 无效  父组件不应该知道子组件的状态-->
+        <!-- 父组件模板的内容在父组件作用域内编译；子组件模板的内容在子组件作用域内编译。-->
+        <!--<child-component v-show="someChildProperty"></child-component>-->
+
+        <child-component v-bind:some-child-property="someChildProperty"></child-component>
+    </div>
+    
+    <script>
+
+       var child = Vue.component('child-component', {
+            // template: '<div>xxx</div>',
+            template: '<div v-show="someChildProperty">xxxx</div>',
+            props: {
+                someChildProperty: {
+                    type: Boolean,
+                    default: true
+                }
+            }
+        });
+
+        new Vue({
+            el: '#app1',
+            components: [child],
+            data: function () {
+                return {
+                    someChildProperty: false
+                };
+            },
+            methods: {
+             
+            }
+        });
+
+    </script>
+</body>
+
+</html>
